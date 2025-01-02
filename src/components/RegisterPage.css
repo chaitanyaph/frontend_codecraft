@@ -1,0 +1,48 @@
+/* Register Page Styles */
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f9fa;
+  }
+  
+  .register-card {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+  }
+  
+  .register-logo {
+    display: block;
+    margin: 0 auto 20px;
+    width: 120px;
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+    color: #343a40;
+  }
+  
+  .form-control {
+    border-radius: 4px;
+    height: 45px;
+  }
+  
+  .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    border-radius: 4px;
+  }
+  
+  .text-success {
+    text-decoration: none;
+  }
+  
+  .text-success:hover {
+    text-decoration: underline;
+  }
+  
