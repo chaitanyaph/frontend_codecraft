@@ -1,0 +1,31 @@
+/* Home.css */
+
+/* Customize heading */
+.home-container h1 {
+  font-size: 3rem;
+  color: #343a40;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Customize paragraph */
+.home-container p {
+  font-size: 1.2rem;
+  color: #6c757d;
+  margin-bottom: 20px;
+}
+
+/* Custom button style */
+.home-container .btn-custom {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.home-container .btn-custom:hover {
+  background-color: #0056b3;
+}

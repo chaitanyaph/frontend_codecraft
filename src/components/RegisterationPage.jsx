@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './RegisterPage.css';
+import { Navbar } from 'react-bootstrap';
+import NavigationBar from './Navbar';
 
 const RegisterPage = () => {
   const [roles, setRoles] = useState([]);
@@ -102,7 +104,9 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="register-container">
+    <>
+      <NavigationBar />
+      <div className="register-container">
       <div className="register-card">
         <h2 className="text-center">Register for CodeCraft</h2>
         <form onSubmit={handleSubmit}>
@@ -300,6 +304,7 @@ const RegisterPage = () => {
         </p>
       </div>
     </div>
+    </>
   );
 };
 
