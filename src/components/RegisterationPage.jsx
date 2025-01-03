@@ -2,23 +2,36 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './RegisterPage.css';
+import { useForm } from 'react-hook-form'; //for validation
 import { Navbar } from 'react-bootstrap';
 import NavigationBar from './Navbar';
 
 const RegisterPage = () => {
   const [roles, setRoles] = useState([]);
-  const [selectedRole, setSelectedRole] = useState('');
-  const [formData, setFormData] = useState({
-    fname: '',
-    lname: '',
-    email: '',
-    contact: '',
-    uname: '',
-    password: '',
-    qualification: '',
-    experience: '',
-    expertise: '',
-  });
+  // const [selectedRole, setSelectedRole] = useState('');
+  // const [formData, setFormData] = useState({
+  //   fname: '',
+  //   lname: '',
+  //   email: '',
+  //   contact: '',
+  //   uname: '',
+  //   password: '',
+  //   qualification: '',
+  //   experience: '',
+  //   expertise: '',
+  // });
+
+  // Initialize useForm hook
+  const {
+    register, // For registering fields
+    handleSubmit, // For form submission
+    formState: { errors }, // To handle validation errors
+    watch,
+    setValue,
+  } = useForm();
+
+  const selectedRole = watch('role');
+
 
   const [submittedData, setSubmittedData] = useState(null); 
 
@@ -55,24 +68,24 @@ const RegisterPage = () => {
     }));
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const onSubmit = async (data) => {
+    // event.preventDefault();
 
     const payload = {
-      fname: formData.fname,
-      lname: formData.lname,
-      username: formData.uname,
-      password: formData.password,
-      email: formData.email,
-      contact: formData.contact,
-      role: selectedRole,
+      fname: data.fname,
+      lname: data.lname,
+      username: data.uname,
+      password: data.password,
+      email: data.email,
+      contact: data.contact,
+      role: data.role,
     };
 
-    if (selectedRole === 'Instructor') {
+    if (data.role === 'Instructor') {
       payload.instructor = {
-        qualification: formData.qualification,
-        experience: formData.experience,
-        expertise: formData.expertise,
+        qualification: data.qualification,
+        experience: data.experience,
+        expertise: data.expertise,
       };
     }
 
@@ -104,12 +117,10 @@ const RegisterPage = () => {
   };
 
   return (
-    <>
-      <NavigationBar />
-      <div className="register-container">
+    <div className="register-container">
       <div className="register-card">
         <h2 className="text-center">Register for CodeCraft</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="row">
             <div className="col-md-6 mb-3">
               <label htmlFor="fname" className="form-label">
@@ -120,11 +131,18 @@ const RegisterPage = () => {
                 id="fname"
                 className="form-control"
                 placeholder="Enter your First Name"
-                value={formData.fname}
-                onChange={handleInputChange}
-                required
-              />
+                // value={formData.fname}
+                // onChange={handleInputChange}
+                // required
+                name="fname" {...register("fname" ,{
+                  required: 'First name is required',
+                  minLength: {value:4,message:"First name must be at least 4 characters long."},
+                  // maxLength:{value:8 ,message:"First name is not more than 8 characters long."}
+                })} />
+                {errors.fname && <p className="text-danger">{errors.fname.message}</p>}
             </div>
+
+            {/* last name  */}
             <div className="col-md-6 mb-3">
               <label htmlFor="lname" className="form-label">
                 Last Name
@@ -134,13 +152,21 @@ const RegisterPage = () => {
                 id="lname"
                 className="form-control"
                 placeholder="Enter your Last Name"
-                value={formData.lname}
-                onChange={handleInputChange}
-                required
+                // value={formData.lname}
+                // onChange={handleInputChange}
+                // required
+                {...register('lname', { required: 'Last Name is required' ,
+                minLength: {value:4,message:"Last name must be at least 4 characters long."},
+                  // maxLength:{value:6 ,message:"Last name is not more than 3 characters long."}
+              
+              
+              })}
               />
+              {errors.lname && <p className="text-danger">{errors.lname.message}</p>}
             </div>
           </div>
-
+ 
+              {/* Email  */}
           <div className="row">
             <div className="col-md-6 mb-3">
               <label htmlFor="email" className="form-label">
@@ -151,11 +177,21 @@ const RegisterPage = () => {
                 id="email"
                 className="form-control"
                 placeholder="Enter your Email"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
+                // value={formData.email}
+                // onChange={handleInputChange}
+                // required
+                 {...register("email",{
+                  required:'Email is required',
+                  pattern: {
+                    value: /^[A-Za-z0-9_.-]{5,10}@gmail.com$/,
+                    message: 'Email must be between 5 to 10 characters long and should end with @gmail.com ',
+                  },
+              })}
               />
+                 {errors.email && <p className="text-danger">{errors.email.message}</p>}
             </div>
+
+            {/* Contact */}
             <div className="col-md-6 mb-3">
               <label htmlFor="contact" className="form-label">
                 Contact
@@ -165,13 +201,22 @@ const RegisterPage = () => {
                 id="contact"
                 className="form-control"
                 placeholder="Enter your Contact"
-                value={formData.contact}
-                onChange={handleInputChange}
-                required
+                // value={formData.contact}
+                // onChange={handleInputChange}
+                // required
+                {...register('contact', {
+                  required: 'Contact is required',
+                  pattern: {
+                    value: /^\d{10}$/,
+                    message:'Contact number must be a valid 10-digit number.',
+                  },
+                })}
               />
+                {errors.contact && <p className="text-danger">{errors.contact.message}</p>}
             </div>
           </div>
 
+               {/* Username */}
           <div className="row">
             <div className="col-md-6 mb-3">
               <label htmlFor="uname" className="form-label">
@@ -182,11 +227,21 @@ const RegisterPage = () => {
                 id="uname"
                 className="form-control"
                 placeholder="Enter your Username"
-                value={formData.uname}
-                onChange={handleInputChange}
-                required
+                // value={formData.uname}
+                // onChange={handleInputChange}
+                // required
+                {...register('uname', { required: 'Username is required',
+                minLength: {value:3,message:"Username name must be at least 3 characters long."},
+                // maxLength:{value:6 ,message:"Username name is not more than 3 characters long."}
+              
+              
+              })}
               />
+              {errors.uname && <p className="text-danger">{errors.uname.message}</p>}
             </div>
+
+            {/* Password filed */}
+
             <div className="col-md-6 mb-3">
               <label htmlFor="password" className="form-label">
                 Password
@@ -196,12 +251,21 @@ const RegisterPage = () => {
                 id="password"
                 className="form-control"
                 placeholder="Create a Password"
-                value={formData.password}
-                onChange={handleInputChange}
-                required
+                // value={formData.password}
+                // onChange={handleInputChange}
+                // required
+                {...register('password', {
+                  required: 'Password is required',
+                  minLength: {
+                    value: 6,
+                    message: 'Password must be at least 6 characters',
+                  },
+                })}
               />
+              {errors.password && <p className="text-danger">{errors.password.message}</p>}
             </div>
           </div>
+
 
           <div className="mb-3">
             <label htmlFor="role" className="form-label">
@@ -210,9 +274,10 @@ const RegisterPage = () => {
             <select
               id="role"
               className="form-control"
-              value={selectedRole}
-              onChange={handleRoleChange}
-              required
+              // value={selectedRole}
+              // onChange={handleRoleChange}
+              // required
+              {...register('role', { required: 'Please select a role.' })}
             >
               <option value="">Choose a role</option>
               {roles.map((role) => (
@@ -221,10 +286,12 @@ const RegisterPage = () => {
                 </option>
               ))}
             </select>
+            {errors.role && <p className="text-danger">{errors.role.message}</p>}
           </div>
 
           {selectedRole === 'Instructor' && (
-            <div>
+            <>
+            {/* <div> */}
               <div className="mb-3">
                 <label htmlFor="qualification" className="form-label">
                   Qualification
@@ -233,12 +300,15 @@ const RegisterPage = () => {
                   type="text"
                   id="qualification"
                   className="form-control"
-                  placeholder="Enter your Qualification"
-                  value={formData.qualification}
-                  onChange={handleInputChange}
-                  required
+                  // placeholder="Enter your Qualification"
+                  // value={formData.qualification}
+                  // onChange={handleInputChange}
+                  // required
+                  {...register('qualification', { required: 'Qualification is required for instructors.' })}
                 />
+                {errors.qualification && <p className="text-danger">{errors.qualification.message}</p>}
               </div>
+
               <div className="mb-3">
                 <label htmlFor="experience" className="form-label">
                   Experience
@@ -248,10 +318,12 @@ const RegisterPage = () => {
                   id="experience"
                   className="form-control"
                   placeholder="Enter your Experience"
-                  value={formData.experience}
-                  onChange={handleInputChange}
-                  required
+                   {...register('experience', {
+                    required: 'Experience is required for instructors.',
+                    valueAsNumber: true,
+                  })}
                 />
+                {errors.experience && <p className="text-danger">{errors.experience.message}</p>}
               </div>
               <div className="mb-3">
                 <label htmlFor="expertise" className="form-label">
@@ -262,12 +334,12 @@ const RegisterPage = () => {
                   id="expertise"
                   className="form-control"
                   placeholder="Enter your Expertise"
-                  value={formData.expertise}
-                  onChange={handleInputChange}
-                  required
+                  {...register('expertise', { required: 'Expertise is required for instructors.' })}
                 />
+                {errors.expertise && <p className="text-danger">{errors.expertise.message}</p>}
               </div>
-            </div>
+            {/* </div> */}
+            </>
           )}
 
           <button type="submit" className="btn btn-success w-100">
@@ -304,7 +376,6 @@ const RegisterPage = () => {
         </p>
       </div>
     </div>
-    </>
   );
 };
 
