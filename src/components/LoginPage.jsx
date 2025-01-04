@@ -26,10 +26,13 @@ const LoginPage = () => {
     if (response.ok) {
       localStorage.setItem("role", data.role);
       localStorage.setItem("username", username);
+      localStorage.setItem("userId", data.userId)
+      localStorage.setItem("fname", data.fname)
 
       if (data.role === "Admin") {
         navigate("/admin");
       } else if (data.role === "Instructor") {
+        localStorage.setItem("instructorId", data.instructorId);  // Store instructorId
         navigate("/instructor");
       } else if (data.role === "Student") {
         navigate("/");

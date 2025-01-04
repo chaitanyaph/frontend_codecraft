@@ -1,10 +1,14 @@
 import React from "react";
 import "./HomePage.css";
+import { Link } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavigationBar from "./Navbar";
 
 const HomePage = () => {
   const username = localStorage.getItem("username");
+  const userId=localStorage.getItem("userId");
+  
+  
 
   return (
     <>
@@ -18,6 +22,7 @@ const HomePage = () => {
         <a href="#courses" className="btn btn-custom">
           Explore Courses
         </a>
+        <Link to={`/update-profile1/${userId}`} className="logout-link">Update Profile</Link> 
       </div>
     </>
   );

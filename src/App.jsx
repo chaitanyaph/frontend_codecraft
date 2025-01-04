@@ -6,6 +6,9 @@ import RegisterPage from './components/RegisterationPage';
 import AdminPage from './components/AdminPage';
 import InstructorPage from './components/InstructorPage';
 import HomePage from './components/Home';
+import UpdateProfile from './components/UpdateProfile';
+import UpdateProfile1 from './components/UpdateProfile1';
+import UpdateStudentProfile from './components/UpdateStudentProfile';
 
 function App() {
   const role = localStorage.getItem('role'); // Get the user's role from localStorage
@@ -28,14 +31,20 @@ function App() {
         {/* Admin Dashboard */}
         <Route
           path="/admin"
-          element={role === 'Admin' ? <AdminPage /> : <Navigate to="/login" />}
+          element={<AdminPage></AdminPage>}
         />
 
         {/* Instructor Dashboard */}
         <Route
           path="/instructor"
-          element={role === 'Instructor' ? <InstructorPage /> : <Navigate to="/login" />}
+          element={<InstructorPage></InstructorPage>}
         />
+                {/* Define the route with a dynamic parameter for instructorId */}
+          <Route path="/update-profile/:instructorId" element={<UpdateProfile></UpdateProfile>} />
+  
+          {/* <Route path="/update-profile/:userId" element={<UpdateProfile1 />} /> */}
+          <Route path='/update-profile1/:userId' element={<UpdateStudentProfile></UpdateStudentProfile>} />
+  
 
         {/* Catch-all: Redirect unknown routes to home */}
         <Route path="*" element={<Navigate to="/" />} />

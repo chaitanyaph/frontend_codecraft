@@ -4,6 +4,7 @@ import './InstructorPage.css';  // Import the CSS file for styling
 
 const InstructorPage = () => {
   const username = localStorage.getItem('username'); // Retrieve username from localStorage
+  const instructorId = localStorage.getItem('instructorId'); // Retrieve instructorId from localStorage
 
   return (
     <div className="instructor-page">
@@ -11,7 +12,9 @@ const InstructorPage = () => {
       <div className="navbar">
         <h1>CodeCraft</h1>
         <div className="navbar-links">
-          <span>Welcome, {username}</span>
+          <span>Welcome, {username}
+          <Link to={`/update-profile/${instructorId}`} className="logout-link">Update Profile</Link> 
+          </span>
           <Link to="/login" className="logout-link">Logout</Link>
         </div>
       </div>
@@ -24,6 +27,19 @@ const InstructorPage = () => {
           track student progress, and view your teaching materials.
         </p>
 
+        
+        <Link to="/update-profile">Update Profile</Link>
+
+        {/* Update Profile Button */}
+        {/* <div className="actions">
+          <div className="action-card">
+            <h3>Update Profile</h3>
+            <p>Update your personal and professional details.</p>
+            <Link to={`/update-profile/${instructorId}`} className="action-link">Update Profile</Link>
+          </div>
+        </div> */}
+
+        {/* Other Actions */}
         <div className="actions">
           <div className="action-card">
             <h3>Manage Courses</h3>

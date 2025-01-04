@@ -45,6 +45,7 @@ const NavigationBar = () => {
             </Dropdown>
           ) : (
             <Nav.Link href="/login" className="btn btn-outline-light">Login</Nav.Link>
+            
           )}
         </Navbar.Collapse>
       </Container>
