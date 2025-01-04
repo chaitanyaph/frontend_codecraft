@@ -1,0 +1,103 @@
+/* Update Profile Page Styles */
+.update-profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f9fa;
+  }
+  
+  .update-profile-card {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+  }
+  
+  .update-profile-logo {
+    display: block;
+    margin: 0 auto 20px;
+    width: 120px;
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+    color: #343a40;
+    text-align: center;
+  }
+  
+  h3 {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #343a40;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+  }
+  
+  .form-control {
+    border-radius: 4px;
+    height: 45px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+  }
+  
+  .form-control:focus {
+    border-color: #0056b3;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    border-radius: 4px;
+    color: #ffffff;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+  
+  .text-danger {
+    color: #dc3545;
+  }
+  
+  .loading,
+  .error-message {
+    font-size: 16px;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .error-message {
+    color: red;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .update-profile-card {
+      width: 90%;
+      padding: 15px;
+    }
+  
+    h2 {
+      font-size: 24px;
+    }
+  
+    .form-control {
+      font-size: 12px;
+    }
+  
+    .btn-primary {
+      font-size: 14px;
+    }
+  }
+  
