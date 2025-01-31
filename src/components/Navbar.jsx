@@ -30,6 +30,7 @@ const NavigationBar = () => {
             <Nav.Link href="#contacts" className={`nav-link-custom ${isActive('/contacts') ? 'active' : ''}`}>Contacts</Nav.Link>
             <Nav.Link href="#aboutus" className={`nav-link-custom ${isActive('/aboutus') ? 'active' : ''}`}>About Us</Nav.Link>
             <Nav.Link href="#articles" className={`nav-link-custom ${isActive('/articles') ? 'active' : ''}`}>Articles</Nav.Link>
+          
           </Nav>
           {username ? (
             <Dropdown>
@@ -39,7 +40,7 @@ const NavigationBar = () => {
               <Dropdown.Menu>
                 {role === 'Admin' && <Dropdown.Item href="#admin-dashboard">Admin Dashboard</Dropdown.Item>}
                 {role === 'Instructor' && <Dropdown.Item href="#manage-courses">Manage Courses</Dropdown.Item>}
-                <Dropdown.Item href="#profile">Profile</Dropdown.Item>
+                <Dropdown.Item href="/update/${userId}">Profile</Dropdown.Item>
                 <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
